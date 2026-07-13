@@ -1,0 +1,20 @@
+﻿Paramètre;Valeur;Unité
+Longueur;1.0;m
+Largeur;0.05;m
+Hauteur;0.1;m
+Force;1000.0;N
+Matériau;Acier de construction;
+Module d'Young;210.0;GPa
+Limite élastique;235.0;MPa
+Masse volumique;7850;kg/m³
+Volume;0.005000000000000001;m³
+Masse;39.25000000000001;kg
+Moment quadratique;4.166666666666668e-06;m⁴
+Moment maximal;1000.0;N·m
+Contrainte maximale;11.999999999999996;MPa
+Flèche maximale;0.38095238095238093;mm
+Flèche admissible;4.0;mm
+Facteur de sécurité;19.58333333333334;
+Résistance respectée;Oui;
+Rigidité respectée;Oui;
+Conclusion;Dimensionnement validé;
