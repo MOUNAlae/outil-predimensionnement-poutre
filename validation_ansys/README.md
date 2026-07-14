@@ -54,24 +54,24 @@ Les contraintes maximales locales au voisinage de l’encastrement augmentent av
 
 ### Maillage final retenu — 25 mm
 
-maillage_25mm.png
+<img width="1919" height="1010" alt="maillage_25mm" src="https://github.com/user-attachments/assets/cce34a78-a5d1-4dcb-8828-e0751ad59b12" />
 
 Le maillage final comporte 2 117 nœuds et 320 éléments. Il est retenu comme compromis entre la précision de la réponse globale et le coût de calcul.
 
 ### Déplacement directionnel suivant Z
 
-deformation_directionnelle_25mm.png
+<img width="1919" height="1004" alt="deformation_directionnelle_25mm" src="https://github.com/user-attachments/assets/93ae28f4-38b0-4835-bc33-7139917054a0" />
 
 La flèche maximale obtenue sous ANSYS est de 1,0959 mm, contre 1,0944 mm avec le modèle analytique Python, soit un écart relatif d’environ 0,14 %.
 
 ### Contrainte équivalente de von Mises
 
-contrainte_equivalente_25mm.png
+<img width="1919" height="1001" alt="contrainte_equivalente_25mm" src="https://github.com/user-attachments/assets/b1c88ae8-d8a7-4b13-a82e-a585c009aea8" />
 
 La contrainte équivalente maximale obtenue avec le maillage de 25 mm est de 12,525 MPa. La contrainte nominale analytique Python est de 12,00 MPa.
 
 ### Vérification de l’équilibre global
 
-reaction_force_25mm.png
+<img width="1919" height="1004" alt="reaction_force_25mm" src="https://github.com/user-attachments/assets/8aad4231-adf2-488d-afa4-a2d18036ac19" />
 
 La réaction suivant l’axe Z vaut 1 000 N et s’oppose à la force appliquée de −1 000 N. L’équilibre global du modèle est donc vérifié.
