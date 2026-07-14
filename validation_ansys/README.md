@@ -50,3 +50,28 @@ Le maillage de 25 mm a été retenu comme compromis entre la précision de la r�
 La réponse globale en déplacement est considérée comme convergée. La variation de la flèche entre les maillages de 25 mm et de 12,5 mm est d’environ 0,082 %.
 
 Les contraintes maximales locales au voisinage de l’encastrement augmentent avec le raffinement du maillage. Elles restent sensibles à la modélisation de l’encastrement parfait et sont donc interprétées avec prudence.
+## Illustrations de la validation
+
+### Maillage final retenu — 25 mm
+
+maillage_25mm.png
+
+Le maillage final comporte 2 117 nœuds et 320 éléments. Il est retenu comme compromis entre la précision de la réponse globale et le coût de calcul.
+
+### Déplacement directionnel suivant Z
+
+deformation_directionnelle_25mm.png
+
+La flèche maximale obtenue sous ANSYS est de 1,0959 mm, contre 1,0944 mm avec le modèle analytique Python, soit un écart relatif d’environ 0,14 %.
+
+### Contrainte équivalente de von Mises
+
+contrainte_equivalente_25mm.png
+
+La contrainte équivalente maximale obtenue avec le maillage de 25 mm est de 12,525 MPa. La contrainte nominale analytique Python est de 12,00 MPa.
+
+### Vérification de l’équilibre global
+
+reaction_force_25mm.png
+
+La réaction suivant l’axe Z vaut 1 000 N et s’oppose à la force appliquée de −1 000 N. L’équilibre global du modèle est donc vérifié.
