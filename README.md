@@ -196,6 +196,34 @@ Les comportements suivants ont été vérifiés :
 - l’absence de solution entre 10 mm et 200 mm est signalée.
 
 Les résultats de référence ont été vérifiés analytiquement dans le cadre des hypothèses définies. Une comparaison avec ANSYS Mechanical reste recommandée pour compléter la validation numérique.
+## Validation numérique sous ANSYS Mechanical
+
+Une validation du modèle analytique a été réalisée à l’aide d’une analyse par éléments finis sous ANSYS Mechanical.
+
+### Cas étudié
+
+- Longueur : 1000 mm
+- Largeur : 50 mm
+- Hauteur : 100 mm
+- Force appliquée : 1000 N
+- Matériau : Aluminium 2024-T3
+
+### Résultats principaux
+
+| Grandeur | Python | ANSYS |
+|-----------|---------|---------|
+| Flèche maximale | 1,0944 mm | 1,0959 mm |
+| Contrainte | 12,00 MPa | 12,525 MPa |
+| Facteur de sécurité | 26,67 | 25,55 |
+
+### Conclusion
+
+L'écart relatif sur la flèche est d'environ 0,14 %, ce qui valide la cohérence du modèle analytique développé en Python.
+
+Les détails de l'étude ANSYS sont disponibles dans le dossier :
+
+validation_ansys/
+``
 ## Améliorations possibles
 
 - Comparaison avec une simulation ANSYS Mechanical
