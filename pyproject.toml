@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "outil-predimensionnement-poutre"
+version = "0.1.0"
+description = "Outil Python de pré-dimensionnement d'une poutre encastrée."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Mohamed Alae Mountassir" }
+]
+dependencies = [
+    "numpy>=2.0",
+    "matplotlib>=3.8"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6"
+]
+
+[project.urls]
+Repository = "https://github.com/MOUNAlae/outil-predimensionnement-poutre"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"

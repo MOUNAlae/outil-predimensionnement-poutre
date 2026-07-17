@@ -1,0 +1,1 @@
+"""Propriétés et catalogue des matériaux."""

@@ -1,0 +1,1 @@
+"""Fonctions de calcul RDM indépendantes de l'interface."""

@@ -1,0 +1,1 @@
+"""Recherche discrète de la section admissible."""
