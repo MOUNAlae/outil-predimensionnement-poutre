@@ -132,3 +132,106 @@ def calculer_fleche_maximale(
         * longueur_m**3
         / (3.0 * module_young_pa * moment_quadratique_m4)
     )
+
+def calculer_volume(
+    longueur_m: float,
+    largeur_m: float,
+    hauteur_m: float,
+) -> float:
+    """Calcule le volume d'une poutre rectangulaire pleine.
+
+    La section est supposée constante sur toute la longueur.
+
+    Args:
+        longueur_m: Longueur de la poutre en mètres.
+        largeur_m: Largeur de la section en mètres.
+        hauteur_m: Hauteur de la section en mètres.
+
+    Returns:
+        Volume de la poutre en mètres cubes.
+
+    Raises:
+        ValueError: Si une dimension est nulle, négative ou non finie.
+    """
+    _verifier_valeur_positive("longueur_m", longueur_m)
+    _verifier_valeur_positive("largeur_m", largeur_m)
+    _verifier_valeur_positive("hauteur_m", hauteur_m)
+
+    return longueur_m * largeur_m * hauteur_m
+
+def calculer_masse(
+    masse_volumique_kg_m3: float,
+    volume_m3: float,
+) -> float:
+    """Calcule la masse d'une poutre à partir de son volume.
+
+    Args:
+        masse_volumique_kg_m3: Masse volumique du matériau en kg/m³.
+        volume_m3: Volume de la poutre en mètres cubes.
+
+    Returns:
+        Masse de la poutre en kilogrammes.
+
+    Raises:
+        ValueError: Si une donnée est nulle, négative ou non finie.
+    """
+    _verifier_valeur_positive(
+        "masse_volumique_kg_m3",
+        masse_volumique_kg_m3,
+    )
+    _verifier_valeur_positive("volume_m3", volume_m3)
+
+    return masse_volumique_kg_m3 * volume_m3
+
+def calculer_facteur_securite(
+    limite_elastique_pa: float,
+    contrainte_maximale_pa: float,
+) -> float:
+    """Calcule le facteur de sécurité par rapport à la limite élastique.
+
+    Le modèle considère une contrainte normale de flexion uniaxiale.
+
+    Args:
+        limite_elastique_pa: Limite élastique du matériau en pascals.
+        contrainte_maximale_pa: Contrainte maximale en pascals.
+
+    Returns:
+        Facteur de sécurité sans unité.
+
+    Raises:
+        ValueError: Si une donnée est nulle, négative ou non finie.
+    """
+    _verifier_valeur_positive(
+        "limite_elastique_pa",
+        limite_elastique_pa,
+    )
+    _verifier_valeur_positive(
+        "contrainte_maximale_pa",
+        contrainte_maximale_pa,
+    )
+
+    return limite_elastique_pa / contrainte_maximale_pa
+
+def calculer_fleche_admissible(
+    longueur_m: float,
+    rapport_fleche: float = 250.0,
+) -> float:
+    """Calcule la flèche admissible selon un rapport longueur/flèche.
+
+    Le rapport utilisé par défaut est L/250. Il s'agit d'un critère
+    de service choisi pour le projet, et non d'une loi universelle.
+
+    Args:
+        longueur_m: Longueur de la poutre en mètres.
+        rapport_fleche: Diviseur du critère de flèche, égal à 250 par défaut.
+
+    Returns:
+        Flèche admissible en mètres.
+
+    Raises:
+        ValueError: Si la longueur ou le rapport est non valide.
+    """
+    _verifier_valeur_positive("longueur_m", longueur_m)
+    _verifier_valeur_positive("rapport_fleche", rapport_fleche)
+
+    return longueur_m / rapport_fleche
