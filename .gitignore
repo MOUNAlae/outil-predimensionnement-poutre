@@ -19,3 +19,16 @@ Thumbs.db
 # Fichiers temporaires
 *.tmp
 *.log
+# Tests et couverture
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Outils de qualité
+.mypy_cache/
+.ruff_cache/
+
+# Construction du package
+build/
+dist/
+*.egg-info/
