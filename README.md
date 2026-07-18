@@ -49,6 +49,39 @@ La reconstruction retrouve une hauteur minimale de `65 mm`, avec une réduction 
 
 Le critère dimensionnant est la rigidité : la flèche optimisée utilise environ `99,6 %` de la limite admissible.
 
+## Validation numérique sous ANSYS Mechanical
+
+Le cas analytique de référence a également été reproduit avec une analyse statique linéaire sous ANSYS Mechanical.
+
+Les mêmes dimensions, le même matériau et le même chargement ont été utilisés :
+
+- longueur : `1 000 mm` ;
+- largeur : `50 mm` ;
+- hauteur : `100 mm` ;
+- force appliquée : `1 000 N` ;
+- matériau : Aluminium 2024-T3 ;
+- module de Young : `73,1 GPa` ;
+- coefficient de Poisson : `0,33`.
+
+### Comparaison Python–ANSYS
+
+| Grandeur | Modèle Python | ANSYS | Écart relatif |
+|---|---:|---:|---:|
+| Flèche maximale | 1,0944 mm | 1,0959 mm | environ 0,14 % |
+| Contrainte | 12,00 MPa | 12,525 MPa | environ 4,38 % |
+| Facteur de sécurité | 26,67 | 25,55 | — |
+| Réaction suivant Z | — | 1 000 N | équilibre vérifié |
+
+Une étude de convergence a été réalisée avec des tailles de maillage de `50 mm`, `25 mm` et `12,5 mm`.
+
+Le maillage de `25 mm`, composé de 2 117 nœuds et 320 éléments, a été retenu comme compromis entre précision et coût de calcul. La variation de la flèche entre les maillages de `25 mm` et `12,5 mm` est d’environ `0,082 %`.
+
+Les contraintes locales près de l’encastrement restent sensibles au raffinement du maillage et doivent être interprétées avec prudence.
+
+![Déformation directionnelle obtenue sous ANSYS](validation_ansys/deformation_directionnelle_25mm.png)
+
+[Consulter l’étude ANSYS complète](validation_ansys/README.md)
+
 ## Fonctionnalités
 
 - calcul du moment quadratique d’une section rectangulaire ;
@@ -122,19 +155,21 @@ $$
 \delta_{\max} \leq \delta_{\mathrm{adm}}
 $$
 
-## Critères d’admissibilité
+## Recherche de la section minimale
 
-Une section est retenue lorsque les deux conditions suivantes sont simultanément respectées :
+L’algorithme parcourt une grille de hauteurs exprimées par des nombres entiers de millimètres.
 
-\[
-FS \geq FS_{\min}
-\]
+Pour chaque hauteur candidate, il recalcule :
 
-\[
-\delta_{\max} \leq \delta_{\mathrm{adm}}
-\]
+- le moment quadratique ;
+- la contrainte maximale ;
+- la flèche maximale ;
+- le facteur de sécurité ;
+- la masse de la poutre.
 
-L’algorithme parcourt les hauteurs avec des entiers exprimés en millimètres. Cette approche produit une grille déterministe et évite les imprécisions associées à l’accumulation de nombres flottants.
+La première hauteur respectant simultanément les critères de résistance et de rigidité est retenue.
+
+Cette grille entière rend la recherche déterministe et évite les imprécisions liées à l’accumulation de nombres flottants.
 
 ## Hypothèses
 
@@ -296,6 +331,12 @@ outil-predimensionnement-poutre/
 │   ├── test_export_api.py
 │   ├── test_materiaux_modeles.py
 │   └── test_optimisation_dimensionnement.py
+├── validation_ansys/
+│   ├── README.md
+│   ├── contrainte_equivalente_25mm.png
+│   ├── deformation_directionnelle_25mm.png
+│   ├── maillage_25mm.png
+│   └── reaction_force_25mm.png
 ├── projet_poutre_v10.py
 ├── pyproject.toml
 └── README.md
@@ -324,6 +365,7 @@ Documents techniques :
 - [Architecture initiale et architecture cible](docs/architecture_initiale.md)
 - [Plan de reconstruction](docs/plan_reconstruction_semaine_1.md)
 - [Cas de référence initial](resultats/cas_reference_initial.md)
+- [Validation numérique sous ANSYS Mechanical](validation_ansys/README.md)
 
 ## Améliorations futures
 
@@ -331,7 +373,7 @@ Documents techniques :
 - sections creuses, circulaires et profilés normalisés ;
 - prise en compte du cisaillement ;
 - diagrammes d’effort tranchant et de moment fléchissant ;
-- comparaison avec un modèle éléments finis ;
+- extension de la validation ANSYS à d’autres géométries et chargements ;
 - export PDF d’une note de calcul ;
 - création d’un exécutable Windows.
 
