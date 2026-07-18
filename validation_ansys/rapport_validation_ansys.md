@@ -2,7 +2,7 @@
 
 ## Outil de pré-dimensionnement d’une poutre encastrée
 
-**Auteur :** Mohamed Alae Mountassir  
+**Auteur :** Mohamed Alae Mountassir
 **Méthodes :** Python, résistance des matériaux, CATIA V5 et ANSYS Mechanical
 
 ## 1. Résumé
