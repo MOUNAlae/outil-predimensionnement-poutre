@@ -1,0 +1,13 @@
+@'
+mode,frequence_ansys_hz,nature,frequence_python_hz,ecart_relatif_pct
+1,41.6005,flexion_1_axe_faible,41.417755,0.441
+2,82.5370,flexion_1_axe_fort,82.835510,0.360
+3,257.700,flexion_2_axe_faible,259.560641,0.717
+4,494.739,flexion_2_axe_fort,519.121281,4.697
+5,589.546,torsion_1,,
+6,708.952,flexion_3_axe_faible,726.777309,2.453
+7,1285.730,axial_1,,
+8,1301.740,flexion_3_axe_fort,1453.554619,10.444
+9,1355.920,flexion_4_axe_faible,1424.193460,4.794
+10,1770.840,torsion_2,,
+'@ | Set-Content validation_ansys/modal/frequences_modales.csv -Encoding utf8
