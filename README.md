@@ -1,7 +1,7 @@
 # Outil de pré-dimensionnement d’une poutre encastrée
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
-![Tests](https://img.shields.io/badge/tests-53%20passed-brightgreen)
+![Tests](https://img.shields.io/badge/tests-57%20passed-brightgreen)
 ![Qualité](https://img.shields.io/badge/qualit%C3%A9-Ruff-D7FF64)
 
 Application Python permettant de vérifier et d’optimiser une poutre encastrée à section rectangulaire soumise à une force ponctuelle à son extrémité libre.
@@ -78,9 +78,43 @@ Le maillage de `25 mm`, composé de 2 117 nœuds et 320 éléments, a été rete
 
 Les contraintes locales près de l’encastrement restent sensibles au raffinement du maillage et doivent être interprétées avec prudence.
 
-![Déformation directionnelle obtenue sous ANSYS](validation_ansys/deformation_directionnelle_25mm.png)
+![Déformation directionnelle obtenue sous ANSYS](validation_ansys/deformation_z_25mm_v2.png)
 
 [Consulter l’étude ANSYS complète](validation_ansys/README.md)
+
+## Validation modale sous ANSYS Mechanical
+
+Une analyse modale libre a été réalisée sur la même poutre encastrée, avec le maillage nominal de `25 mm`.
+
+Le modèle extrait dix modes propres comprenant :
+
+- des modes de flexion suivant les deux axes principaux ;
+- deux modes de torsion ;
+- un mode axial.
+
+Les fréquences analytiques de flexion sont calculées dans `src/poutre/modal.py` selon la théorie d’Euler-Bernoulli, puis comparées aux fréquences numériques obtenues sous ANSYS.
+
+### Comparaison des fréquences de flexion
+
+| Mode de flexion | Axe | Python | ANSYS | Écart relatif |
+|---:|---|---:|---:|---:|
+| 1 | faible | 41,4178 Hz | 41,6005 Hz | 0,441 % |
+| 1 | fort | 82,8355 Hz | 82,5370 Hz | 0,360 % |
+| 2 | faible | 259,5606 Hz | 257,700 Hz | 0,717 % |
+| 2 | fort | 519,1213 Hz | 494,739 Hz | 4,697 % |
+| 3 | faible | 726,7773 Hz | 708,952 Hz | 2,453 % |
+| 3 | fort | 1 453,5546 Hz | 1 301,740 Hz | 10,444 % |
+| 4 | faible | 1 424,1935 Hz | 1 355,920 Hz | 4,794 % |
+
+Les trois premières comparaisons présentent des écarts inférieurs à `1 %`.
+
+L’écart augmente pour les modes supérieurs, notamment parce que le modèle d’Euler-Bernoulli néglige la déformation de cisaillement, l’inertie de rotation et le comportement tridimensionnel de la section.
+
+Les amplitudes modales affichées par ANSYS sont normalisées et ne représentent pas des déplacements physiques réels.
+
+![Premier mode de flexion suivant l’axe faible](validation_ansys/modal/mode_01_flexion_axe_faible.png)
+
+[Consulter le rapport de validation modale](validation_ansys/modal/rapport_validation_modale.md)
 
 ## Fonctionnalités
 
@@ -88,6 +122,9 @@ Les contraintes locales près de l’encastrement restent sensibles au raffineme
 - calcul du moment maximal à l’encastrement ;
 - calcul de la contrainte maximale de flexion ;
 - calcul de la flèche selon Euler-Bernoulli ;
+- calcul analytique des fréquences propres de flexion suivant les deux axes principaux ;
+- comparaison des fréquences analytiques avec une analyse modale ANSYS ;
+- identification des modes de flexion, de torsion et de vibration axiale ;
 - calcul du volume et de la masse ;
 - calcul du facteur de sécurité ;
 - vérification de la résistance et de la rigidité ;
@@ -300,7 +337,10 @@ La suite couvre notamment :
 - le dimensionnement en acier ;
 - la comparaison de masse ;
 - l’API publique ;
-- l’export CSV.
+- l’export CSV;
+- les fréquences propres analytiques du cas de référence ;
+- la distinction entre l’axe faible et l’axe fort ;
+- la validation du nombre de modes demandé.
 
 ## Architecture
 
