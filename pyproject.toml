@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "outil-predimensionnement-poutre"
-version = "0.1.0"
+version = "1.0.1"
 description = "Outil Python de pré-dimensionnement d'une poutre encastrée"
 readme = "README.md"
 requires-python = ">=3.11"
