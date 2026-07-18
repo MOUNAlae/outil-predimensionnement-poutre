@@ -145,14 +145,9 @@ def rechercher_hauteur_minimale(
             donnees.facteur_securite_minimal / facteur_securite
         )
 
-        taux_utilisation_rigidite = (
-            fleche_maximale_m / fleche_admissible_m
-        )
+        taux_utilisation_rigidite = fleche_maximale_m / fleche_admissible_m
 
-        if (
-            taux_utilisation_resistance > 1.0
-            or taux_utilisation_rigidite > 1.0
-        ):
+        if taux_utilisation_resistance > 1.0 or taux_utilisation_rigidite > 1.0:
             continue
 
         volume_m3 = calculer_volume(

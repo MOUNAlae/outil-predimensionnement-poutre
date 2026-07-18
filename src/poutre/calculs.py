@@ -1,4 +1,3 @@
-
 """Fonctions de calcul RDM indépendantes de l'interface."""
 
 import math
@@ -7,9 +6,7 @@ import math
 def _verifier_valeur_positive(nom: str, valeur: float) -> None:
     """Vérifie qu'une donnée est finie et strictement positive."""
     if not math.isfinite(valeur) or valeur <= 0:
-        raise ValueError(
-            f"{nom} doit être un nombre fini strictement positif."
-        )
+        raise ValueError(f"{nom} doit être un nombre fini strictement positif.")
 
 
 def calculer_moment_quadratique(
@@ -35,6 +32,7 @@ def calculer_moment_quadratique(
 
     return largeur_m * hauteur_m**3 / 12.0
 
+
 def calculer_moment_maximal(
     force_n: float,
     longueur_m: float,
@@ -58,6 +56,7 @@ def calculer_moment_maximal(
     _verifier_valeur_positive("longueur_m", longueur_m)
 
     return force_n * longueur_m
+
 
 def calculer_contrainte_maximale(
     moment_maximal_nm: float,
@@ -89,11 +88,8 @@ def calculer_contrainte_maximale(
 
     distance_fibre_extreme_m = hauteur_m / 2.0
 
-    return (
-        moment_maximal_nm
-        * distance_fibre_extreme_m
-        / moment_quadratique_m4
-    )
+    return moment_maximal_nm * distance_fibre_extreme_m / moment_quadratique_m4
+
 
 def calculer_fleche_maximale(
     force_n: float,
@@ -127,11 +123,8 @@ def calculer_fleche_maximale(
         moment_quadratique_m4,
     )
 
-    return (
-        force_n
-        * longueur_m**3
-        / (3.0 * module_young_pa * moment_quadratique_m4)
-    )
+    return force_n * longueur_m**3 / (3.0 * module_young_pa * moment_quadratique_m4)
+
 
 def calculer_volume(
     longueur_m: float,
@@ -159,6 +152,7 @@ def calculer_volume(
 
     return longueur_m * largeur_m * hauteur_m
 
+
 def calculer_masse(
     masse_volumique_kg_m3: float,
     volume_m3: float,
@@ -182,6 +176,7 @@ def calculer_masse(
     _verifier_valeur_positive("volume_m3", volume_m3)
 
     return masse_volumique_kg_m3 * volume_m3
+
 
 def calculer_facteur_securite(
     limite_elastique_pa: float,
@@ -211,6 +206,7 @@ def calculer_facteur_securite(
     )
 
     return limite_elastique_pa / contrainte_maximale_pa
+
 
 def calculer_fleche_admissible(
     longueur_m: float,

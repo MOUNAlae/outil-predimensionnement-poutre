@@ -1,7 +1,7 @@
 """Propriétés et catalogue des matériaux."""
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Final
 
 
@@ -36,9 +36,7 @@ class Materiau:
 
         for nom, valeur in proprietes.items():
             if not math.isfinite(valeur) or valeur <= 0:
-                raise ValueError(
-                    f"{nom} doit être un nombre fini strictement positif."
-                )
+                raise ValueError(f"{nom} doit être un nombre fini strictement positif.")
 
 
 ALUMINIUM_2024_T3: Final[Materiau] = Materiau(
@@ -61,8 +59,7 @@ MATERIAUX_DISPONIBLES: Final[tuple[Materiau, ...]] = (
 )
 
 _MATERIAUX_PAR_NOM: Final[dict[str, Materiau]] = {
-    materiau.nom: materiau
-    for materiau in MATERIAUX_DISPONIBLES
+    materiau.nom: materiau for materiau in MATERIAUX_DISPONIBLES
 }
 
 
@@ -83,6 +80,5 @@ def obtenir_materiau(nom: str) -> Materiau:
     except KeyError as erreur:
         noms_disponibles = ", ".join(_MATERIAUX_PAR_NOM)
         raise ValueError(
-            f"Matériau inconnu : {nom}. "
-            f"Valeurs disponibles : {noms_disponibles}."
+            f"Matériau inconnu : {nom}. Valeurs disponibles : {noms_disponibles}."
         ) from erreur

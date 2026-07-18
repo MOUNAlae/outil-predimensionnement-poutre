@@ -17,9 +17,7 @@ def _verifier_valeur_positive(
         raise TypeError(f"{nom} doit être une valeur numérique.")
 
     if not math.isfinite(valeur) or valeur <= 0:
-        raise ValueError(
-            f"{nom} doit être un nombre fini strictement positif."
-        )
+        raise ValueError(f"{nom} doit être un nombre fini strictement positif.")
 
 
 @dataclass(frozen=True, slots=True)
@@ -50,9 +48,7 @@ class DonneesPoutre:
             _verifier_valeur_positive(nom, valeur)
 
         if not isinstance(self.materiau, Materiau):
-            raise TypeError(
-                "materiau doit être une instance de Materiau."
-            )
+            raise TypeError("materiau doit être une instance de Materiau.")
 
 
 class CritereDimensionnant(str, Enum):
@@ -176,17 +172,12 @@ class ResultatDimensionnement:
         """Vérifie les types des résultats regroupés."""
 
         if not isinstance(self.section_initiale, ResultatSection):
-            raise TypeError(
-                "section_initiale doit être un ResultatSection."
-            )
+            raise TypeError("section_initiale doit être un ResultatSection.")
 
-        if (
-            self.optimisation is not None
-            and not isinstance(self.optimisation, ResultatOptimisation)
+        if self.optimisation is not None and not isinstance(
+            self.optimisation, ResultatOptimisation
         ):
-            raise TypeError(
-                "optimisation doit être un ResultatOptimisation ou None."
-            )
+            raise TypeError("optimisation doit être un ResultatOptimisation ou None.")
 
     @property
     def solution_trouvee(self) -> bool:
