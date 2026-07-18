@@ -1,8 +1,6 @@
 """Recherche discrète de la section admissible."""
 
 import math
-from dataclasses import dataclass
-from enum import Enum
 
 from .calculs import (
     calculer_contrainte_maximale,
@@ -14,47 +12,11 @@ from .calculs import (
     calculer_moment_quadratique,
     calculer_volume,
 )
-from .modeles import DonneesPoutre
-
-
-class CritereDimensionnant(str, Enum):
-    """Critère mécanique le plus proche de sa limite admissible."""
-
-    RESISTANCE = "résistance"
-    RIGIDITE = "rigidité"
-    MIXTE = "résistance et rigidité"
-
-
-@dataclass(frozen=True, slots=True)
-class ResultatOptimisation:
-    """Résultat nommé de la recherche d'une hauteur admissible."""
-
-    hauteur_mm: int
-    moment_quadratique_m4: float
-    volume_m3: float
-    masse_kg: float
-    contrainte_maximale_pa: float
-    fleche_maximale_m: float
-    fleche_admissible_m: float
-    facteur_securite: float
-    taux_utilisation_resistance: float
-    taux_utilisation_rigidite: float
-    critere_dimensionnant: CritereDimensionnant
-
-    @property
-    def hauteur_m(self) -> float:
-        """Retourne la hauteur optimisée en mètres."""
-        return self.hauteur_mm / 1000.0
-
-    @property
-    def contrainte_maximale_mpa(self) -> float:
-        """Retourne la contrainte maximale en mégapascals."""
-        return self.contrainte_maximale_pa / 1e6
-
-    @property
-    def fleche_maximale_mm(self) -> float:
-        """Retourne la flèche maximale en millimètres."""
-        return self.fleche_maximale_m * 1000.0
+from .modeles import (
+    CritereDimensionnant,
+    DonneesPoutre,
+    ResultatOptimisation,
+)
 
 
 def _identifier_critere_dimensionnant(
