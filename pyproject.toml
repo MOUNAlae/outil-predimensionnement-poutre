@@ -26,6 +26,9 @@ dev = [
 [project.urls]
 Repository = "https://github.com/MOUNAlae/outil-predimensionnement-poutre"
 
+[project.scripts]
+poutre = "poutre.interface:lancer_interface"
+
 [tool.setuptools]
 package-dir = { "" = "src" }
 
@@ -47,6 +50,10 @@ select = ["E4", "E7", "E9", "F", "I"]
 [tool.coverage.run]
 source = ["poutre"]
 branch = true
+omit = [
+    "src/poutre/interface.py",
+    "src/poutre/__main__.py",
+]
 
 [tool.coverage.report]
 show_missing = true
